@@ -21,10 +21,9 @@
                         
                         <div class="col-xs-6">
 
-                            
                             <?php insert_categories(); ?>
 
-                            <form action="" method="post">
+                            <form action="categories.php" method="post">
                                 <div class="form-group">
                                     <label for="cat_title">Add Category</label>
                                     <input class="form-control" type="text" name="cat_title">
@@ -35,13 +34,9 @@
                             </form>
                             
                             <?php 
-
-                                if(isset($_GET['edit'])) {
-                                    $cat_id = $_GET['edit'];
-
-                                    include "includes/update_categories.php";
-
-                                }
+                            
+                            // UPDATE CATEGORIES
+                            include "includes/update_categories.php";                                
 
                             ?>
 
