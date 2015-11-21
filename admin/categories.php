@@ -1,9 +1,9 @@
-<?php include "includes/header.php"; ?>
+<?php include "includes/admin_header.php"; ?>
 
     <div id="wrapper">
 
     <!-- Navigation -->
-    <?php include "includes/navigation.php"; ?>
+    <?php include "includes/admin_navigation.php"; ?>
 
         <div id="page-wrapper">
 
@@ -15,23 +15,36 @@
 
 
                         <h1 class="page-header">
-                            Admin
+                            Welcome to Admin
                             <small>Author</small>
                         </h1>
                         
                         <div class="col-xs-6">
-                            <form action="">
+
+                            <?php insert_categories(); ?>
+
+                            <form action="categories.php" method="post">
                                 <div class="form-group">
-                                    <label for="cat-title">Add Category</label>
+                                    <label for="cat_title">Add Category</label>
                                     <input class="form-control" type="text" name="cat_title">
                                 </div>
                                 <div class="form-group">
                                     <input class="btn btn-primary" type="submit" name="submit" value="Add Category">
                                 </div>
                             </form>
-                        </div> <!-- Add Category Form -->
+                            
+                            <?php 
+                            
+                            // UPDATE CATEGORIES
+                            include "includes/update_categories.php";                                
 
-                        <div class="col-xs-6">
+                            ?>
+
+                        </div> <!-- Add Category Form -->                      
+                        
+                        <div class="col-xs-6"> 
+
+
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -40,10 +53,39 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Basketball Category</td>
-                                        <td>Basketbal</td>
-                                    </tr>
+                                   
+                                <?php 
+
+                                // FIND ALL CATEGORIES QUERIES
+                                $query = "SELECT * FROM categories";
+                                $select_categories = mysqli_query($connection, $query);
+
+                                while($row = mysqli_fetch_assoc($select_categories)) {
+                                    $cat_id = $row['cat_id'];
+                                    $cat_title = $row['cat_title'];
+                                    echo "<tr>";
+                                    echo "<td>{$cat_id}</td>";
+                                    echo "<td>{$cat_title}</td>";
+                                    echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
+                                    echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
+                                    echo "</tr>";
+                                }
+
+                                ?>
+
+                                <?php 
+
+                                // DELETE QUERY
+                                if (isset($_GET['delete'])) {
+                                    $the_cat_id = $_GET['delete'];
+
+                                    $query = "DELETE FROM categories WHERE cat_id = {$the_cat_id} ";
+                                    $delete_query = mysqli_query($connection, $query);
+                                    header("Location: categories.php");
+                                }
+
+                                ?>
+                                    
                                 </tbody>
                             </table>
                         </div> <!-- Add Table -->
@@ -62,4 +104,4 @@
     </div>
     <!-- /#wrapper -->
 
-<?php include "includes/footer.php"; ?>
+<?php include "includes/admin_footer.php"; ?>
