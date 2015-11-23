@@ -45,7 +45,16 @@ if (isset($_POST['update_post'])) {
     $post_content = $_POST['post_content'];
     $post_tags = $_POST['post_tags'];
 
-    move_uploaded_file($post_image_temp, "./images/$post_image");
+    move_uploaded_file($post_image_temp, "../images/$post_image");
+
+    if(empty($post_image)) {
+    	$query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
+    	$select_image = mysqli_query($connection, $query);
+
+    	while ($row = mysqli_fetch_assoc($select_image)) {
+    		$post_image = $row['post_image'];
+    	}
+    }
 
     $query = "UPDATE posts SET ";
     $query .= "post_title = '{$post_title}', ";
@@ -68,7 +77,7 @@ if (isset($_POST['update_post'])) {
 <form action="" method="post" enctype="multipart/form-data">
 	
 	<div class="form-group">
-		<label for="title">Edit Title</label>
+		<label for="title">Post Title</label>
 		<input value="<?php echo $post_title;?>" type="text" class="form-control" name="post_title">
 	</div>
 	
@@ -108,8 +117,9 @@ if (isset($_POST['update_post'])) {
 	</div>
 
 	<div class="form-group">
-		<img width="100" src="../images/<?php echo $post_image; ?>" alt="image">
-	</div>
+	    <img width="100" src="../images/<?php echo $post_image; ?>" alt="">
+	    <input type="file" name="image">
+    </div>
 	
 	<div class="form-group">
 		<label for="post_tags">Post Tags</label>

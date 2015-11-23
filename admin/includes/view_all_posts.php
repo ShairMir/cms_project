@@ -36,7 +36,16 @@
                 echo "<td>{$post_id}</td>";
                 echo "<td>{$post_author}</td>";
                 echo "<td>{$post_title}</td>";
-                echo "<td>{$post_category_id}</td>";
+
+
+                $query = "SELECT * FROM categories WHERE cat_id = $post_category_id ";
+                $select
+
+                echo "<td>ddd{$post_category_id}</td>";
+        
+
+
+
                 echo "<td>{$post_status}</td>";
                 echo "<td><img src='../images/{$post_image}' width='100' alt = 'image'></td>";
                 echo "<td>{$post_tags}</td>";
