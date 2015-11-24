@@ -137,3 +137,67 @@ if (isset($_POST['update_post'])) {
 
 
 </form>
+
+
+<!-- SECOND FORM -->
+
+<form action="" method="post" enctype="multipart/form-data">
+	
+	<div class="form-group">
+		<label for="title">First Name</label>
+		<input type="text" class="form-control" name="user_firstname">
+	</div>
+
+	<div class="form-group">
+		<label for="title">Last Name</label>
+		<input type="text" class="form-control" name="user_lastname">
+	</div>
+	
+	<div class="form-group">
+		<select name="user_role" id="">
+			
+			<?php 
+
+			$query = "SELECT * FROM users";
+			$select_users = mysqli_query($connection, $query);
+
+			confirmQuery($select_users);
+
+			while ($row = mysqli_fetch_assoc($select_users)) {
+				$user_id = $row['user_id'];
+				$user_role = $row['user_role'];
+
+				echo "<option value='$user_id'>{$user_role}</option>";
+
+			}
+
+			?>	
+			
+
+		</select>
+	</div>
+
+
+	<!-- <div class="form-group">
+		<label for="post_image">Post Image</label>
+		<input type="file" name="image">
+	</div> -->
+	
+	<div class="form-group">
+		<label for="post_tags">Username</label>
+		<input type="text" class="form-control" name="username">
+	</div>
+
+	<div class="form-group">
+		<label for="post_tags">Email</label>
+		<input type="email" class="form-control" name="user_email">
+	</div>	
+
+	<div class="form-group">
+		<label for="post_tags">Password</label>
+		<input type="email" class="form-control" name="user_password">
+	</div>	
+
+	<div class="form-group">
+		<input type="submit" class="btn btn-primary" name="create_user" value="Add User">
+	</div>
