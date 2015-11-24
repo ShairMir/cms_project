@@ -14,7 +14,7 @@
 
 
                 <?php 
-
+                // SHOW ALL POSTS
                 $query = "SELECT * FROM posts";
                 $select_all_posts_query = mysqli_query($connection, $query);
 
