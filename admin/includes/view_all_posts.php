@@ -76,16 +76,5 @@ if(isset($_GET['delete'])) {
     header("Location: posts.php");
 }
 
-
-
-
-
-
-
 ?>
-
-
-
-
-
 
