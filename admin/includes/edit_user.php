@@ -21,7 +21,7 @@ if (isset($_GET['edit_user'])) {
 
 }
 
-if (isset($_POST['edit_user'])) {
+if (isset($_POST['update_user'])) {
 	
 	$user_firstname = $_POST['user_firstname'];
 	$user_lastname = $_POST['user_lastname'];
@@ -49,6 +49,7 @@ if (isset($_POST['edit_user'])) {
 	$update_users_query = mysqli_query($connection, $query);
 
 	confirmQuery($update_users_query);
+	header("Lcation: edit_user.php");
 
 }
 
@@ -68,9 +69,18 @@ if (isset($_POST['edit_user'])) {
 	
 	<div class="form-group">
 		<select name="user_role" id="">
-			<option value="subscriber">Select Options</option>
-			<option value="admin">Admin</option>
-			<option value="subscriber">Subscriber</option>
+			
+			<option value="subscriber"><?php echo $user_role; ?></option>
+			<?php 
+
+			if ($user_role == 'admin') {
+				echo "<option value='subscriber'>subscriber</option>";
+			} else {
+				echo "<option value='admin'>admin</option>";
+			}
+
+			?>
+			
 		</select>
 	</div>
 
@@ -95,7 +105,7 @@ if (isset($_POST['edit_user'])) {
 	</div>	
 
 	<div class="form-group">
-		<input type="submit" class="btn btn-primary" name="edit_user" value="Update User">
+		<input type="submit" class="btn btn-primary" name="update_user" value="Update User">
 	</div>
 
 
