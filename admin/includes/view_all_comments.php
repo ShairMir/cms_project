@@ -85,7 +85,7 @@ if (isset($_GET['delete'])) {
     header("Location: comments.php");
 }
 
-// UPDATING APPROVAL STATUS to UNAPPROVE
+// UPDATING APPROVAL STATUS to UNAPPROVED
 if (isset($_GET['unapprove'])) {
     $the_comment_id = $_GET['unapprove'];
 
@@ -95,7 +95,7 @@ if (isset($_GET['unapprove'])) {
     header("Location: comments.php");
 }
 
-// UPDATING APPROVAL STATUS to APPROVE
+// UPDATING APPROVAL STATUS to APPROVED
 if (isset($_GET['approve'])) {
     $the_comment_id = $_GET['approve'];
 
