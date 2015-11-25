@@ -46,7 +46,7 @@ if (isset($_POST['update_user'])) {
 	$update_users_query = mysqli_query($connection, $query);
 
 	confirmQuery($update_users_query);
-	header("Lcation: edit_user.php");
+	header("Location: edit_user.php");
 
 }
 

@@ -1,6 +1,6 @@
 <?php include "includes/admin_header.php"; ?>
 
-<?php 
+<?php // READING ALL USERS DB
 
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
@@ -20,6 +20,39 @@ if (isset($_SESSION['username'])) {
         $user_image = $row['user_image'];
         $user_role = $row['user_role'];
     }
+}    
+?>
+
+<?php // UPDATING USER PROFILE
+
+if (isset($_POST['update_profile'])) {
+    $user_firstname = $_POST['user_firstname'];
+    $user_lastname = $_POST['user_lastname'];
+    $user_role = $_POST['user_role'];
+
+    // $user_image = $_FILES['image']['name'];
+    // $user_image_temp = $_FILES['image']['tmp_name'];
+
+    $username = $_POST['username'];
+    $user_email = $_POST['user_email'];
+    $user_password = $_POST['user_password'];
+    // $user_date = date('d-m-y');
+
+    // move_uploaded_file($post_image_temp, "./images/$post_image");
+
+    $query = "UPDATE users SET ";
+    $query .= "user_firstname = '{$user_firstname}', ";
+    $query .= "user_lastname = '{$user_lastname}', ";
+    $query .= "user_role = '{$user_role}', ";
+    $query .= "username = '{$username}', ";
+    $query .= "user_email = '{$user_email}', ";
+    $query .= "user_password = '{$user_password}' ";
+    $query .= "WHERE username = '{$username}'";
+
+    $update_users_profile_query = mysqli_query($connection, $query);
+
+    confirmQuery($update_users_profile_query);
+    header("Location: profile.php");
 
 }
 
@@ -94,7 +127,7 @@ if (isset($_SESSION['username'])) {
                             </div>  
 
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary" name="update_user" value="Update Profile">
+                                <input type="submit" class="btn btn-primary" name="update_profile" value="Update Profile">
                             </div>
                         </form>
 
