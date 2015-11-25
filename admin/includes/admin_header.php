@@ -1,6 +1,15 @@
-<?php ob_start(); ?>
 <?php include "../includes/db.php"; ?>
 <?php include "functions.php"; ?>
+<?php ob_start(); ?>
+<?php session_start(); ?>
+
+<?php // NO access to admin if there is no user_role present
+
+if (!isset($_SESSION['user_role'])) {
+    header("Location: ../index.php");
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +40,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
 
 <body>
