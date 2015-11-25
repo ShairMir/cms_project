@@ -18,7 +18,7 @@ if (isset($_GET['edit_user'])) {
 	}
 }
 
-if (isset($_POST['update_user'])) {
+if (isset($_POST['edit_user'])) {
 	
 	$user_firstname = $_POST['user_firstname'];
 	$user_lastname = $_POST['user_lastname'];
@@ -41,12 +41,11 @@ if (isset($_POST['update_user'])) {
 	$query .= "username = '{$username}', ";
 	$query .= "user_email = '{$user_email}', ";
 	$query .= "user_password = '{$user_password}' ";
-	$query .= "WHERE user_id = {$the_user_id}";
+	$query .= "WHERE user_id = {$the_user_id} ";
 
-	$update_users_query = mysqli_query($connection, $query);
+	$edit_user_query = mysqli_query($connection, $query);
 
-	confirmQuery($update_users_query);
-	header("Location: edit_user.php");
+	confirmQuery($edit_user_query);
 
 }
 
@@ -102,7 +101,7 @@ if (isset($_POST['update_user'])) {
 	</div>	
 
 	<div class="form-group">
-		<input type="submit" class="btn btn-primary" name="update_user" value="Update User">
+		<input type="submit" class="btn btn-primary" name="edit_user" value="Update User">
 	</div>
 
 
