@@ -71,8 +71,8 @@
 
                                     $query = "SELECT * FROM comments";
                                     $select_all_comments = mysqli_query($connection, $query);
-                                    $post_comments = mysqli_num_rows($select_all_comments);
-                                    echo "<div class='huge'>$post_comments</div>"
+                                    $comment_count = mysqli_num_rows($select_all_comments);
+                                    echo "<div class='huge'>$comment_count</div>"
 
                                     ?>
                                     
@@ -102,8 +102,8 @@
 
                                     $query = "SELECT * FROM users";
                                     $select_all_users = mysqli_query($connection, $query);
-                                    $post_users = mysqli_num_rows($select_all_users);
-                                    echo "<div class='huge'>$post_users</div>"
+                                    $users_count = mysqli_num_rows($select_all_users);
+                                    echo "<div class='huge'>$users_count</div>"
 
                                     ?>
 
@@ -133,8 +133,8 @@
 
                                     $query = "SELECT * FROM categories";
                                     $select_all_categories = mysqli_query($connection, $query);
-                                    $post_categories = mysqli_num_rows($select_all_categories);
-                                    echo "<div class='huge'>$post_categories</div>"
+                                    $categories_count = mysqli_num_rows($select_all_categories);
+                                    echo "<div class='huge'>$categories_count</div>"
 
                                     ?>
 
