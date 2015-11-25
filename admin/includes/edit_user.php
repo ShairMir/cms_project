@@ -16,9 +16,6 @@ if (isset($_GET['edit_user'])) {
 	    $user_image = $row['user_image'];
 	    $user_role = $row['user_role'];
 	}
-
-
-
 }
 
 if (isset($_POST['update_user'])) {
