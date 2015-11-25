@@ -39,8 +39,8 @@
 
                                     $query = "SELECT * FROM posts";
                                     $select_all_posts = mysqli_query($connection, $query);
-                                    $post_counts = mysqli_num_rows($select_all_posts);
-                                    echo "<div class='huge'>$post_counts</div>"
+                                    $post_count = mysqli_num_rows($select_all_posts);
+                                    echo "<div class='huge'>$post_count</div>"
 
                                     ?>
 
@@ -102,8 +102,8 @@
 
                                     $query = "SELECT * FROM users";
                                     $select_all_users = mysqli_query($connection, $query);
-                                    $users_count = mysqli_num_rows($select_all_users);
-                                    echo "<div class='huge'>$users_count</div>"
+                                    $user_count = mysqli_num_rows($select_all_users);
+                                    echo "<div class='huge'>$user_count</div>"
 
                                     ?>
 
@@ -133,8 +133,8 @@
 
                                     $query = "SELECT * FROM categories";
                                     $select_all_categories = mysqli_query($connection, $query);
-                                    $categories_count = mysqli_num_rows($select_all_categories);
-                                    echo "<div class='huge'>$categories_count</div>"
+                                    $category_count = mysqli_num_rows($select_all_categories);
+                                    echo "<div class='huge'>$category_count</div>"
 
                                     ?>
 
@@ -153,6 +153,15 @@
                 </div>
             </div>
             <!-- /.row -->
+            
+            
+            <?php 
+
+            
+            
+            ?>
+
+
 
             <div class="row">
                 <script type="text/javascript">
@@ -164,11 +173,19 @@
 
                         <?php 
 
-                        
+                        // Creating 2 arrays with corresponding index data
+                        $element_text = ['Active Posts', 'Comments', 'Users', 'Categories'];
+                        $element_count = [$post_count, $comment_count, $user_count, $category_count];
+
+                        // Echo each individual array based on length of $element_text array
+                        for($i = 0; $i < count($element_text); $i++) {
+
+                            echo "['{$element_text[$i]}' " . ", " . "{$element_count[$i]}],";
+                        }
 
                         ?>
 
-                        ['Posts', 1000],
+                        // ['Posts', 1000],
                       
                         ]);
 
