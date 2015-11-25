@@ -14,7 +14,7 @@
 
 
                     <h1 class="page-header">
-                        Welcome to admin
+                        Welcome to the Dashboard
                         <small><?php echo $_SESSION['username']; ?></small>
                     </h1>
 
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="posts.php">
+                        <a href="./posts.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -80,7 +80,7 @@
                                </div>
                            </div>
                         </div>
-                        <a href="comments.php">
+                        <a href="./comments.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

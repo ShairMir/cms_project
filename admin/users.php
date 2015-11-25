@@ -15,7 +15,7 @@
 
 
                         <h1 class="page-header">
-                            Welcome to Admin
+                            All Users
                             <small>Author</small>
                         </h1>
                         
