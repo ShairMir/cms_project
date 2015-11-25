@@ -3,11 +3,11 @@
 <?php ob_start(); ?>
 <?php session_start(); ?>
 
-<?php 
+<?php // Getting access to ADMIN depending on USER_ROLE
 
 if (isset($_SESSION['user_role'])) {
     
-    if ($_SESSION['user_role'] == 'subscriber') {
+    if ($_SESSION['user_role'] !== 'admin') {
         header("Location: ../index.php");
     }
 }
