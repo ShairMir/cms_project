@@ -1,6 +1,6 @@
 # cms_project
 
-Creating a CMS using PHP, MySQL and Bootstrap template.
+Creating a CMS using Procedural PHP, MySQL and Bootstrap template.
 
 Udemy Course Used:
 
