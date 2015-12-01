@@ -1,4 +1,4 @@
-<form method="post">
+<form action="" method="post">
     <div class="form-group">
         <label for="cat_title">Edit Category</label>
 
@@ -40,6 +40,7 @@
             if(!$update_query) {
                 die("QUERY FAILED" . mysqli_error($connection));
             }
+            header('Location: ' . $_SERVER['PHP_SELF']);
         }
 
         ?>
