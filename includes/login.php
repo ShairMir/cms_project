@@ -13,7 +13,7 @@ if (isset($_POST['login'])) {
 	$password = mysqli_real_escape_string($connection, $password);
 	// Make a query based on the username from the login form submit button
 	$query = "SELECT * FROM users WHERE username = '{$username}' ";
-	$select_user_query = mysqli_query($connection, $query); // assigning the Q-results to a variable
+	$select_user_query = mysqli_query($connection, $query); // assigning the Query-results to a variable
 
 	if (!$select_user_query) {
 		die("Query Failed" . mysqli_error($connection));

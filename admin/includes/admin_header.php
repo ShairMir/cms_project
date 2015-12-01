@@ -3,10 +3,12 @@
 <?php ob_start(); ?>
 <?php session_start(); ?>
 
-<?php // NO access to admin if there is no user_role present
+<?php // NO access to admin if there is no user_role present of admin
 
-if (!isset($_SESSION['user_role'])) {
-    header("Location: ../index.php");
+if (isset($_SESSION['user_role'])) {
+    if($_SESSION['user_role'] !== 'admin') {
+        header("Location: ../index.php");
+    }
 }
 
 ?>
