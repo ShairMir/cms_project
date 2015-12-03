@@ -82,8 +82,7 @@ if (isset($_POST['update_post'])) {
 	</div>
 	
 	<div class="form-group">
-		<label for="title">Post Category</label>
-		<br>
+		<label for="title">Post Category</label><br>
 		<select name="post_category" id="">
 			
 			<?php 
@@ -114,8 +113,7 @@ if (isset($_POST['update_post'])) {
 	</div>
 
 	<div class="form-group">
-		<label for="title">Post Status</label>
-		<br>
+		<label for="title">Post Status</label><br>
 		<select name="post_status" id="">
 
 			<option value="<?php echo $post_status ?>"><?php echo $post_status ?></option>
@@ -135,6 +133,7 @@ if (isset($_POST['update_post'])) {
 	</div>
 
 	<div class="form-group">
+		<label for="post_image">Post Image</label><br>
 	    <img width="100" src="../images/<?php echo $post_image; ?>" alt="">
 	    <input type="file" name="image">
     </div>
