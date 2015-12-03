@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 <?php session_start(); ?>
 
-<?php // NO access to admin if there is no user_role present of admin
+<?php // NO access to admin if there is no user_role present of admin inside the session.
 
 if (isset($_SESSION['user_role'])) {
     if($_SESSION['user_role'] !== 'admin') {
