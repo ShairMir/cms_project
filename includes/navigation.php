@@ -1,4 +1,5 @@
 <?php include "includes/db.php"; ?>
+<?php session_start(); ?>
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -17,7 +18,7 @@
                 <ul class="nav navbar-nav">
                     
 
-                <?php 
+                <?php // SHOW ALL CATEGORIES IN NAVIGATION BAR
 
                 $query = "SELECT * FROM categories";
                 $select_all_categories_query = mysqli_query($connection, $query);
@@ -27,16 +28,28 @@
                         echo "<li> <a href='#'>{$cat_title}</a> </li>";
                     }    
                 ?>
-
-                    <li>
+                    
+                 <!--    <li>
                         <a href="admin">Admin</a>
                     </li>
-                    <!-- <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li> -->
+ -->
+                    <?php 
+
+                    if($_SESSION['user_role'] == 'admin') {
+                        echo "<li><a href='admin'>Admin</a></li>";
+                    }
+
+                    if(isset($_SESSION['user_role'])) {
+                        if(isset($_GET['p_id'])) {
+                            $the_post_id = $_GET['p_id'];
+                            echo "<li><a href='admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
+                        }
+                    }
+
+
+                    ?>
+
+                   
 
 
                 </ul>
