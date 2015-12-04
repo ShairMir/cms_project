@@ -1,12 +1,34 @@
+<?php 
+
+if (isset($_POST['checkBoxArray'])) {
+    foreach($_POST['checkBoxArray'] as $postValueId) {
+        $bulk_options = $_POST['bulk_options'];
+
+
+        switch($bulk_options) {
+            case 'published':
+                
+                $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$postValueId} ";
+                $update_to_published_status = mysqli_query($connection, $query);
+
+                break;
+        }
+
+
+    }
+}
+
+?>
+
 <form action="" method="post">
     <table class="table table-bordered table-hover">
 
         <div id="bulkOptionContainer" class="col-xs-4">
-            <select class="form-control" name="" id="">
+            <select class="form-control" name="bulk_options" id="">
                 <option value="">Select Options</option>
-                <option value="">Publish</option>
-                <option value="">Draft</option>
-                <option value="">Delete</option>
+                <option value="published">Publish</option>
+                <option value="draft">Draft</option>
+                <option value="delete">Delete</option>
             </select>
             <br>
         </div>
@@ -37,7 +59,7 @@
         </thead>
         <tbody>
             
-            <?php 
+            <?php // SHOWING ALL POSTS INSIDE A TABLE
 
             if (isset($connection)) {
                 
@@ -96,7 +118,7 @@
  </form>
 
 
- <?php 
+ <?php // DELETING POSTS BASED ON THE POST_ID
 
 if(isset($_GET['delete'])) {
     $the_post_id = $_GET['delete'];
