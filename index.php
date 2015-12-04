@@ -14,7 +14,7 @@
 
 
                 <?php 
-                // SHOW ALL POSTS BASED ON PUBLISHED post_status
+                // SHOW ALL POSTS BASED ON PUBLISHED post_status and limited to 3
                 $query = "SELECT * FROM posts";
                 $select_all_posts_query = mysqli_query($connection, $query);
 
@@ -28,7 +28,7 @@
                     $post_tags = $row['post_tags'];
                     $post_status = $row['post_status'];
 
-                    // if not published...
+                    // show post if status is published
                     if ($post_status == 'published') {
                                   
                         ?> 

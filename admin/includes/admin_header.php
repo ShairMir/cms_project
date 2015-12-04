@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 <?php session_start(); ?>
 
-<?php // NO access to admin if there is no user_role present of admin
+<?php // NO access to admin if there is no user_role present of admin inside the session.
 
 if (isset($_SESSION['user_role'])) {
     if($_SESSION['user_role'] !== 'admin') {
@@ -43,6 +43,9 @@ if (isset($_SESSION['user_role'])) {
     <![endif]-->
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<!-- Add Web Editing to Textareas with https://tinymce.com/ -->
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({ selector:'textarea' });</script>
 </head>
 
 <body>
