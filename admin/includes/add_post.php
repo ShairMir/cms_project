@@ -23,6 +23,10 @@ if (isset($_POST['create_post'])) {
 
 	confirmQuery($create_post_query);
 
+	$post_id = mysqli_insert_id($connection);
+
+	echo "<p class='bg-success'>Post Added. <a class='text-danger' href='../post.php?p_id=$post_id'>View Post</a> or <a class='text-danger' href='posts.php'>Show All Posts</a> </p>";
+
 }
 
 ?>
