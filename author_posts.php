@@ -11,19 +11,23 @@
             <!-- Blog Entries Column -->
 
             <div class="col-md-8">
+                
+               
 
-
+               
+    
                 <?php 
 
                 if (isset($_GET['p_id'])) {
                     $the_post_id = $_GET['p_id'];
                     $the_post_author = $_GET['author'];
 
+                    echo "<h1 class='page-header'>All posts by $the_post_author</h1>";      
                 }
 
                 $query = "SELECT * FROM posts WHERE post_author = '{$the_post_author}' ";
                 $select_all_posts_query = mysqli_query($connection, $query);
-                
+
                 while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
                     $post_title = $row['post_title'];
                     $post_author = $row['post_author'];
@@ -33,10 +37,6 @@
                     $post_tags = $row['post_tags'];
                 
                 ?>
-
-                    <h1 class="page-header">
-                        All author posts by <?php echo $post_author ?>
-                    </h1>
 
                     <!-- Blog Post -->
                     <h2>
