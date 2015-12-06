@@ -136,7 +136,7 @@ if (isset($_POST['update_post'])) {
 
 	<div class="form-group">
 		<label for="post_image">Post Image</label><br>
-	    <img width="100" src="../images/<?php echo $post_image; ?>" alt="">
+	    <img width="100" src="../images/<?php echo $post_image; ?>" alt="image">
 	    <input type="file" name="image">
     </div>
 	
