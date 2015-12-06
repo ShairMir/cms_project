@@ -29,6 +29,8 @@ if (isset($_POST['login'])) {
 		$db_user_role = $row['user_role'];
 	}
 
+	$password = crypt($password, $db_user_password);
+
 	// Check if the username and password match the username and password inside DB
 	if ($username === $db_username && $password === $db_user_password) {
 		// if a match, assign sessions to that user
@@ -36,10 +38,15 @@ if (isset($_POST['login'])) {
 		$_SESSION['firstname'] = $db_user_firstname;
 		$_SESSION['lastname'] = $db_user_lastname;
 		$_SESSION['user_role'] = $db_user_role;
-		
-		header("Location: ../admin/index.php");
 
 	} else { // else redirect back to index.php
+		header("Location: ../index.php");
+	}
+
+	// Only give admins access to admin area
+	if($db_user_role === 'admin') {
+		header("Location: ../admin/index.php");
+	} else {
 		header("Location: ../index.php");
 	}
 }

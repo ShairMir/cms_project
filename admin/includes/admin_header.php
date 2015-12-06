@@ -1,14 +1,14 @@
+<?php ob_start(); ?>
 <?php include "../includes/db.php"; ?>
 <?php include "functions.php"; ?>
-<?php ob_start(); ?>
 <?php session_start(); ?>
 
-<?php // NO access to admin if there is no user_role present of admin inside the session.
+<?php 
 
-if (isset($_SESSION['user_role'])) {
-    if($_SESSION['user_role'] !== 'admin') {
-        header("Location: ../index.php");
-    }
+if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+
+} else {
+    header("location: ../index.php");
 }
 
 ?>
@@ -31,6 +31,7 @@ if (isset($_SESSION['user_role'])) {
 
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">

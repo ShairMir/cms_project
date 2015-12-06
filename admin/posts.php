@@ -37,10 +37,6 @@
                                 include "includes/edit_post.php";
                                 break;
 
-                            case '34';
-                                echo "Nice 100";
-                                break;
-
                             default;
                                 // code here
                                 include "includes/view_all_posts.php";
