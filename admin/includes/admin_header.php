@@ -5,13 +5,10 @@
 
 <?php 
 
-if(isset($_SESSION['user_role'])) {
+if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
 
 } else {
-
-header("location: ../index.php");
-
-
+    header("location: ../index.php");
 }
 
 ?>
