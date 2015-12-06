@@ -34,8 +34,8 @@
                         ?> 
 
                         <h1 class="page-header">
-                            Page Heading
-                            <small>Secondary Text</small>
+                            Blog Posts
+                            <small></small>
                         </h1>
 
                         <!-- All Blog Posts -->
