@@ -91,7 +91,6 @@ if (isset($_POST['checkBoxArray'])) {
                 <th>Comments</th>
                 <th>Date</th>
                 <th>View Count</th>
-                <th>View</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -128,7 +127,7 @@ if (isset($_POST['checkBoxArray'])) {
 
                     echo "<td>{$post_id}</td>";
                     echo "<td>{$post_author}</td>";
-                    echo "<td>{$post_title}</td>";
+                    echo "<td><a href='../post.php?p_id={$post_id}'>{$post_title}</a></td>";
 
                     // Query for showing the post categories dynamically
                     $query = "SELECT * FROM categories WHERE cat_id = $post_category_id ";
@@ -147,7 +146,6 @@ if (isset($_POST['checkBoxArray'])) {
                     echo "<td>{$post_comment_count}</td>";
                     echo "<td>{$post_date}</td>";
                     echo "<td>{$post_views_count}</td>";
-                    echo "<td><a href='../post.php?p_id={$post_id}'>View Post</a></td>";
                     echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
                     echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this post?')\" href='posts.php?delete=$post_id'>Delete</a></td>";
                     echo "</tr>";
