@@ -11,7 +11,10 @@
             <!-- Blog Entries Column -->
 
             <div class="col-md-8">
-
+                
+                <h1 class="page-header">
+                    Blog Posts
+                </h1>
 
                 <?php 
                 // SHOW ALL POSTS BASED ON PUBLISHED post_status and limited to 3
@@ -33,10 +36,7 @@
                                   
                         ?> 
 
-                        <h1 class="page-header">
-                            Blog Posts
-                            <small></small>
-                        </h1>
+                        
 
                         <!-- All Blog Posts -->
                         <h2>
