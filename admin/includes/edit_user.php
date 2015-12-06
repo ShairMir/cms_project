@@ -59,7 +59,7 @@ if (isset($_POST['edit_user'])) {
 
 	confirmQuery($edit_user_query);
 
-	echo "<p class='bg-success'>User Updated. <a class='text-danger' href='../admin/users.php'>View All Users</a></p>";
+	echo "<p class='bg-success'>User Updated. <a class='text-danger' href='../admin/users.php'>View All Users?</a></p>";
 
 }
 

@@ -63,7 +63,7 @@
                 echo "<td>{$comment_date}</td>";
                 echo "<td><a href='comments.php?approve=$comment_id'>Approve</a></td>";
                 echo "<td><a href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";
-                echo "<td><a href='comments.php?delete=$comment_id'>Delete</a></td>";
+                echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this comment?')\" href='comments.php?delete=$comment_id'>Delete</a></td>";
                 echo "</tr>";
             }        
         } 
