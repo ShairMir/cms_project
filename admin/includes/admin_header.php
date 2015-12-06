@@ -43,9 +43,10 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<!-- Add Web Editing to Textareas with https://tinymce.com/ -->
-<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <!-- Add Web Editing to Textareas with https://tinymce.com/ -->
+    <script src="https://cdn.tinymce.com/4/tinymce.min.js"></script>
+
 </head>
 
 <body>

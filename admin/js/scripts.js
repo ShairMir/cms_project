@@ -21,4 +21,4 @@ $(document).ready(function() {
 	// $('#load-screen').delay(100).fadeOut(600, function() {
 	// 	$(this).remove();
 
-});
+// });
