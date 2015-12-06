@@ -1,5 +1,5 @@
 <?php 
-
+// Looping through the checBoxArray and executing code based on the value chosen in bulk_options form
 if (isset($_POST['checkBoxArray'])) {
     foreach($_POST['checkBoxArray'] as $postValueId) {
         $bulk_options = $_POST['bulk_options'];
@@ -11,25 +11,48 @@ if (isset($_POST['checkBoxArray'])) {
                 $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$postValueId} ";
                 $update_to_published_status = mysqli_query($connection, $query);
                 confirmQuery($update_to_published_status);
-
                 break;
+
             case 'draft':
                 
                 $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$postValueId} ";
                 $update_to_draft_status = mysqli_query($connection, $query);
                 confirmQuery($update_to_draft_status);
-
                 break;
+
             case 'delete':
 
                 $query = "DELETE FROM posts where post_id = {$postValueId}";
                 $delete_posts = mysqli_query($connection, $query);
                 confirmQuery($delete_posts);
-
                 break;
+
+            case 'clone':
+
+                $query = "SELECT * FROM posts WHERE post_id = '{$postValueId}' ";
+                $select_post_query = mysqli_query($connection, $query);
+
+                while($row = mysqli_fetch_assoc($select_post_query)) {
+                    $post_title     = $row['post_title'];
+                    $post_category_id = $row['post_category_id'];
+                    $post_date      = $row['post_date'];
+                    $post_author    = $row['post_author'];
+                    $post_status    = $row['post_status'];
+                    $post_image     = $row['post_image'];
+                    $post_tags      = $row['post_tags'];
+                    $post_content   = $row['post_content'];
+                }
+
+                $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_status, post_image, post_tags, post_content) ";
+                $query .= "VALUES({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_status}', '{$post_image}', '{$post_tags}', '{$post_content}') ";
+
+                $copy_query = mysqli_query($connection, $query);
+                if(!$copy_query) {
+                    die("Query Failed" . mysqli_error($connection));
+                }
+
+                break;             
         }
-
-
     }
 }
 
@@ -44,6 +67,7 @@ if (isset($_POST['checkBoxArray'])) {
                 <option value="published">Publish</option>
                 <option value="draft">Draft</option>
                 <option value="delete">Delete</option>
+                <option value="clone">Clone</option>
             </select>
             <br>
         </div>
@@ -77,7 +101,7 @@ if (isset($_POST['checkBoxArray'])) {
 
             if (isset($connection)) {
                 
-                $query = "SELECT * FROM posts";
+                $query = "SELECT * FROM posts ORDER BY post_id DESC ";
                 $select_all_posts = mysqli_query($connection, $query);
 
                 while ($row = mysqli_fetch_assoc($select_all_posts)) {
@@ -94,7 +118,8 @@ if (isset($_POST['checkBoxArray'])) {
                     echo "<tr>";
 
                     ?>
-
+                    
+                    <!-- checkboxes for each post_id  -->
                     <td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id; ?>'></td>
                     
                     <?php
