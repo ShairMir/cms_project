@@ -39,10 +39,10 @@
                 $count = mysqli_num_rows($find_count); // count rows in posts table
               
                 $count = ceil($count / 5); // convert float into integer for the count
+               
 
-                
-
-                // SHOW ALL POSTS BASED ON PUBLISHED post_status and limited to 5 posts for the pagination
+                // SHOW ALL POSTS BASED ON:
+                // most recent published post and limited to 5 posts for the pagination
                 $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT $page_1, 5  "; // e.g. 10, 5 = show posts 11-15 
                 $select_all_posts_query = mysqli_query($connection, $query);
 
