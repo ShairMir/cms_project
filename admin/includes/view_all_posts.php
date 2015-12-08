@@ -91,7 +91,6 @@ if (isset($_POST['checkBoxArray'])) {
                 <th>Comments</th>
                 <th>Date</th>
                 <th>View Count</th>
-                <th>Reset Count</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -147,8 +146,8 @@ if (isset($_POST['checkBoxArray'])) {
                     echo "<td>{$post_comment_count}</td>";
                     echo "<td>{$post_date}</td>";
                     echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to reset the view count?')\" href='posts.php?reset=$post_id' >$post_views_count</a></td>";
-                    echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
-                    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this post?')\" href='posts.php?delete=$post_id'>Delete</a></td>";
+                    echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'><i class='fa fa-pencil-square-o fa-lg'></i></a></td>";
+                    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this post?')\" href='posts.php?delete=$post_id'><i class='fa fa-times fa-lg'></i></a></td>";
                     echo "</tr>";
                 }        
             } 
