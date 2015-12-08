@@ -20,3 +20,16 @@ background-repeat: no-repeat;
 background-position: center;
 
 }
+
+a i.fa {
+	color: #2290F2;
+}
+
+a i.fa-times {
+	color: red;
+}
+
+a i.fa-pencil-square-o {
+	color: #9E8605;
+}
+
