@@ -30,6 +30,13 @@ a i.fa-times {
 }
 
 a i.fa-pencil-square-o {
-	color: #9E8605;
+	color: #0E7748;
 }
 
+td {
+	text-align: center;
+}
+
+.table thead:first-child>tr:first-child>th {
+	text-align: center;
+}
