@@ -20,6 +20,7 @@
                 // PAGINATION FUNCTIONALITY
 
                 $per_page = 3; // amount of posts per page
+                $page = 'default';
 
                 // GET request for page number
                 if(isset($_GET['page'])) { 
@@ -63,7 +64,6 @@
                                   
                         ?> 
 
-                        
                         <!-- All Blog Posts -->
                         <h2>
                             <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title ?></a>
@@ -100,7 +100,15 @@
         <?php // SHOWING PAGINATION NUMBERS BASED ON THE ROWS COUNT OF PUBLISHED POSTS
 
         for($i = 1; $i <= $count; $i++) {
-            echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
+
+            if($i == $page) { // styles the clicked page by adding a class
+                echo "<li><a class='active_link' href='index.php?page={$i}'>{$i}</a></li>";
+            } elseif ($i == 1 && $page == "") { // styles the first page link by default
+                echo "<li><a class='first_link' href='index.php?page={$i}'>{$i}</a></li>";
+            } else { 
+                echo "<li><a href='index.php?page={$i}'>{$i}</a></li>"; 
+            }
+
         }
 
         ?>
