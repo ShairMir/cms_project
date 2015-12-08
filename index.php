@@ -16,12 +16,10 @@
                     Blog Posts
                 </h1>
                 
-                
-
                 <?php 
                 // PAGINATION FUNCTIONALITY
 
-                // 
+                // GET request for page number
                 if(isset($_GET['page'])) {
                     $page = $_GET['page'];
                 } else {
@@ -45,7 +43,7 @@
                 
 
                 // SHOW ALL POSTS BASED ON PUBLISHED post_status and limited to 5 posts for the pagination
-                $query = "SELECT * FROM posts WHERE post_status = 'published' LIMIT $page_1, 5  "; // e.g. 10, 5 = show posts 11-15 
+                $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT $page_1, 5  "; // e.g. 10, 5 = show posts 11-15 
                 $select_all_posts_query = mysqli_query($connection, $query);
 
                 while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
@@ -93,10 +91,11 @@
 
         </div>
         <!-- /.row -->
+        
 
         <ul class="pager">
 
-        <?php 
+        <?php // SHOWING PAGINATION NUMBERS BASED ON THE ROWS COUNT OF PUBLISHED POSTS
 
         for($i = 1; $i <= $count; $i++) {
             echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
