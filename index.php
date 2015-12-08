@@ -19,8 +19,10 @@
                 <?php 
                 // PAGINATION FUNCTIONALITY
 
+                $per_page = 3; // amount of posts per page
+
                 // GET request for page number
-                if(isset($_GET['page'])) {
+                if(isset($_GET['page'])) { 
                     $page = $_GET['page'];
                 } else {
                     $page = "";
@@ -29,7 +31,7 @@
                 if($page == "" || $page == 1) { // if its the first page or the GET request is for page 1..
                     $page_1 = 0; // start LIMIT query with 0 when showing all posts..
                 } else {
-                    $page_1 = ($page * 5) - 5; // else show posts corresponding to the page number e.g. page 3 = LIMIT 10, 5
+                    $page_1 = ($page * $per_page) - $per_page; // else show posts corresponding to the page number e.g. page 3 = LIMIT 10, 5
                 }
 
                 // Query to count the number of published posts and converting it into an integer
@@ -38,12 +40,12 @@
 
                 $count = mysqli_num_rows($find_count); // count rows in posts table
               
-                $count = ceil($count / 5); // convert float into integer for the count
+                $count = ceil($count / $per_page); // convert float into integer for the count
                
 
                 // SHOW ALL POSTS BASED ON:
                 // most recent published post and limited to 5 posts for the pagination
-                $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT $page_1, 5  "; // e.g. 10, 5 = show posts 11-15 
+                $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT $page_1, $per_page  "; // e.g. 10, 5 = show posts 11-15 
                 $select_all_posts_query = mysqli_query($connection, $query);
 
                 while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
