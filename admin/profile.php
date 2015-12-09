@@ -40,13 +40,24 @@ if (isset($_POST['edit_user'])) {
 
     // move_uploaded_file($post_image_temp, "./images/$post_image");
 
+    $query = "SELECT randSalt FROM users";
+    $select_randsalt_query = mysqli_query($connection, $query);
+    if (!$select_randsalt_query) {
+        die("Query Failed" . mysqli_error($connection));
+    }
+
+    $row = mysqli_fetch_array($select_randsalt_query);
+    $salt = $row['randSalt'];
+    $hashed_password = crypt($user_password, $salt);
+
+    // update DB table
     $query = "UPDATE users SET ";
     $query .= "user_firstname = '{$user_firstname}', ";
     $query .= "user_lastname = '{$user_lastname}', ";
     $query .= "user_role = '{$user_role}', ";
     $query .= "username = '{$username}', ";
     $query .= "user_email = '{$user_email}', ";
-    $query .= "user_password = '{$user_password}' ";
+    $query .= "user_password = '{$hashed_password}' ";
     $query .= "WHERE username = '{$username}' ";
 
     $edit_user_query = mysqli_query($connection, $query);
@@ -71,10 +82,18 @@ if (isset($_POST['edit_user'])) {
 
 
                         <h1 class="page-header">
-                            Welcome to Admin
+                            Profile
                             <small>Author</small>
                         </h1>
-                        
+                                
+                        <?php 
+
+                        if (isset($_POST['edit_user'])) {
+                            echo "<p class='bg-success'>Your profile has been updated.</p>";
+                        }
+
+                        ?>
+
                         <form action="" method="post" enctype="multipart/form-data">
                             
                             <div class="form-group">
