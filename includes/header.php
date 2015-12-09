@@ -19,6 +19,8 @@
     <!-- Custom CSS -->
     <link href="css/blog-home.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+    <!-- Font Families -->
+    <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Open+Sans' rel='stylesheet' type='text/css'>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

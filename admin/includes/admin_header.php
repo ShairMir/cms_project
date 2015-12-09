@@ -35,6 +35,8 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Font Families -->
+    <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Open+Sans' rel='stylesheet' type='text/css'>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

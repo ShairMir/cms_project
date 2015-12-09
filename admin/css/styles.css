@@ -8,7 +8,6 @@ height: 1600px;
 
 }
 
-
 #loading {
 
 width: 500px;
@@ -21,7 +20,11 @@ background-position: center;
 
 }
 
-a i.fa {
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+a i.fa-fw {
 	color: #2290F2;
 }
 
@@ -33,10 +36,17 @@ a i.fa-pencil-square-o {
 	color: #0E7748;
 }
 
-td {
-	text-align: center;
+.fa-user {
+	color: #2290F2;
 }
 
+
 .table thead:first-child>tr:first-child>th {
+	text-align: center;
+	background-color: black;
+	color: white;
+}
+
+td {
 	text-align: center;
 }
