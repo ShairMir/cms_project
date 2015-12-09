@@ -37,6 +37,7 @@ if (isset($_POST['edit_user'])) {
 	// Select the default Salt value from the database, used for password encryption
 	$query = "SELECT randSalt FROM users";
 	$select_randsalt_query = mysqli_query($connection, $query);
+
 	if (!$select_randsalt_query) {
 		die("Query Failed" . mysqli_error($connection));
 	}
