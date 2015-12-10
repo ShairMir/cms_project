@@ -25,7 +25,7 @@ body {
 }
 
 a i.fa-fw {
-	color: #2290F2;
+	/*color: #2290F2;*/
 }
 
 a i.fa-times {
@@ -40,7 +40,6 @@ a i.fa-pencil-square-o {
 	color: #2290F2;
 }
 
-
 .table thead:first-child>tr:first-child>th {
 	text-align: center;
 	background-color: black;
@@ -50,3 +49,24 @@ a i.fa-pencil-square-o {
 td {
 	text-align: center;
 }
+
+/*.navbar-inverse,
+.side-nav {
+    background-color: #D40037;
+    border-color: #D40037;
+}
+
+div#wrapper {
+	background-color: #D40037;
+}
+
+div#wrapper a {
+	color: white;
+}
+
+*/
+
+
+
+
+
