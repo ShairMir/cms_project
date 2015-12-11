@@ -25,7 +25,7 @@ body {
 }
 
 a i.fa-fw {
-	/*color: #2290F2;*/
+	color: #2290F2;
 }
 
 a i.fa-times {
@@ -49,8 +49,8 @@ a i.fa-pencil-square-o {
 td {
 	text-align: center;
 }
-
-/*.navbar-inverse,
+/*
+.navbar-inverse,
 .side-nav {
     background-color: #D40037;
     border-color: #D40037;
@@ -59,12 +59,12 @@ td {
 div#wrapper {
 	background-color: #D40037;
 }
-
-div#wrapper a {
+*/
+/*div#wrapper a {
 	color: white;
 }
-
 */
+
 
 
 
