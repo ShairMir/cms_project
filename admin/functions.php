@@ -10,7 +10,7 @@ function users_online() {
             session_start();
             include("../includes/db.php");
 
-            $session = session_id();
+            $session = session_id(); // catch each unique session inside a variable
             $time = time();
             $time_out_in_seconds = 60;
             $time_out = $time - $time_out_in_seconds;
