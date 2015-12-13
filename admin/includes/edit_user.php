@@ -1,11 +1,13 @@
 <?php 
 
+// Get request user id and database data extraction
 if (isset($_GET['edit_user'])) {
+
 	$the_user_id = $_GET['edit_user'];
 
 	$query = "SELECT * FROM users WHERE user_id = $the_user_id";
-
 	$select_users_query = mysqli_query($connection, $query);
+
 	while ($row = mysqli_fetch_assoc($select_users_query)) {
 		$user_id = $row['user_id'];
 	    $username = $row['username'];
@@ -16,41 +18,50 @@ if (isset($_GET['edit_user'])) {
 	    $user_image = $row['user_image'];
 	    $user_role = $row['user_role'];
 	}
-}
 
-if (isset($_POST['edit_user'])) {
-	
-	$user_firstname = $_POST['user_firstname'];
-	$user_lastname = $_POST['user_lastname'];
-	$user_role = $_POST['user_role'];
+	// Post request to update user
+	if (isset($_POST['edit_user'])) { 
+		
+		$user_firstname = $_POST['user_firstname'];
+		$user_lastname = $_POST['user_lastname'];
+		$user_role = $_POST['user_role'];
+		$username = $_POST['username'];
+		$user_email = $_POST['user_email'];
+		$user_password = $_POST['user_password'];
+		$user_date = date('d-m-y');
 
-	// $user_image = $_FILES['image']['name'];
-	// $user_image_temp = $_FILES['image']['tmp_name'];
+		if (!empty($user_password)) {
 
-	$username = $_POST['username'];
-	$user_email = $_POST['user_email'];
-	$user_password = $_POST['user_password'];
-	$user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12) );
-	// $user_date = date('d-m-y');
+			$query_password = "SELECT user_password WHERE user_id = $the_user_id";
+			$get_user_query = mysqli_query($connection, $query);
+			confirmQuery($get_user_query);
 
-	// move_uploaded_file($post_image_temp, "./images/$post_image");
+			$row = mysqli_fetch_array($get_user_query);
+			$db_user_password = $row['user_password'];
 
-	// Update DB
-	$query = "UPDATE users SET ";
-	$query .= "user_firstname = '{$user_firstname}', ";
-	$query .= "user_lastname = '{$user_lastname}', ";
-	$query .= "user_role = '{$user_role}', ";
-	$query .= "username = '{$username}', ";
-	$query .= "user_email = '{$user_email}', ";
-	$query .= "user_password = '{$user_password}' ";
-	$query .= "WHERE user_id = {$the_user_id} ";
+			if ($db_user_password != $user_password) {
+				$hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12) );
+			}	
 
-	$edit_user_query = mysqli_query($connection, $query);
+			// Update DB
+			$query = "UPDATE users SET ";
+			$query .= "user_firstname = '{$user_firstname}', ";
+			$query .= "user_lastname = '{$user_lastname}', ";
+			$query .= "user_role = '{$user_role}', ";
+			$query .= "username = '{$username}', ";
+			$query .= "user_email = '{$user_email}', ";
+			$query .= "user_password = '{$hashed_password}' ";
+			$query .= "WHERE user_id = {$the_user_id} ";
 
-	confirmQuery($edit_user_query);
+			$edit_user_query = mysqli_query($connection, $query);
 
-	echo "<p class='bg-success'>User Updated. <a class='text-danger' href='../admin/users.php'>View All Users?</a></p>";
+			confirmQuery($edit_user_query);
 
+			echo "<p class='bg-success'>User Updated. <a class='text-danger' href='../admin/users.php'>View All Users?</a></p>";
+		} 
+	} 
+} else { // If the user id is not present in the URL, redirect to the home page
+	header("Location: index.php");
 }
 
 ?>
