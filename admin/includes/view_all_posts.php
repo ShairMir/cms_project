@@ -58,6 +58,11 @@ if (isset($_POST['checkBoxArray'])) {
 
 ?>
 
+<h1 class="page-header">
+    All Posts
+</h1>
+                        
+
 <form action="" method="post">
     <table class="table table-bordered table-hover">
 

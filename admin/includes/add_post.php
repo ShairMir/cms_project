@@ -31,6 +31,10 @@ if (isset($_POST['create_post'])) {
 
 ?>
 
+<h1 class="page-header">
+    Add Post
+</h1>
+
 <form action="" method="post" enctype="multipart/form-data">
 	
 	<div class="form-group">
