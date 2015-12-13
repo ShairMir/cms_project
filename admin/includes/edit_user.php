@@ -33,7 +33,7 @@ if (isset($_GET['edit_user'])) {
 		if (!empty($user_password)) {
 
 			$query_password = "SELECT user_password WHERE user_id = $the_user_id";
-			$get_user_query = mysqli_query($connection, $query);
+			$get_user_query = mysqli_query($connection, $query_password);
 			confirmQuery($get_user_query);
 
 			$row = mysqli_fetch_array($get_user_query);
