@@ -151,7 +151,7 @@ if (isset($_POST['checkBoxArray'])) {
                     $comment_id = $row['comment_id'];
                     $count_comments = mysqli_num_rows($send_comment_query);
 
-                    echo "<td><a href='comment.php?id=$comment_id'>{$count_comments}</a></td>";
+                    echo "<td><a href='post_comments.php?id=$post_id'>{$count_comments}</a></td>";
 
                     echo "<td>{$post_date}</td>";
                     echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to reset the view count?')\" href='posts.php?reset=$post_id' >$post_views_count</a></td>";
