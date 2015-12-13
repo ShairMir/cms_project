@@ -30,6 +30,7 @@ if (isset($_POST['edit_user'])) {
 	$username = $_POST['username'];
 	$user_email = $_POST['user_email'];
 	$user_password = $_POST['user_password'];
+	$user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12) );
 	// $user_date = date('d-m-y');
 
 	// move_uploaded_file($post_image_temp, "./images/$post_image");
