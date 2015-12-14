@@ -9,39 +9,42 @@ if (isset($_GET['edit_user'])) {
 	$select_users_query = mysqli_query($connection, $query);
 
 	while ($row = mysqli_fetch_assoc($select_users_query)) {
-		$user_id = $row['user_id'];
-	    $username = $row['username'];
-	    $user_password = $row['user_password'];
-	    $user_firstname = $row['user_firstname'];
-	    $user_lastname = $row['user_lastname'];
-	    $user_email = $row['user_email'];
-	    $user_image = $row['user_image'];
-	    $user_role = $row['user_role'];
-	}
 
+		$user_id 		= $row['user_id'];
+	    $username 		= $row['username'];
+	    $user_password 	= $row['user_password'];
+	    $user_firstname = $row['user_firstname'];
+	    $user_lastname 	= $row['user_lastname'];
+	    $user_email 	= $row['user_email'];
+	    $user_image 	= $row['user_image'];
+	    $user_role 		= $row['user_role'];
+	}
+?>
+
+<?php 
 	// Post request to update user
 	if (isset($_POST['edit_user'])) { 
 		
 		$user_firstname = $_POST['user_firstname'];
-		$user_lastname = $_POST['user_lastname'];
-		$user_role = $_POST['user_role'];
-		$username = $_POST['username'];
-		$user_email = $_POST['user_email'];
-		$user_password = $_POST['user_password'];
-		$user_date = date('d-m-y');
+		$user_lastname 	= $_POST['user_lastname'];
+		$user_role 		= $_POST['user_role'];
+		$username 		= $_POST['username'];
+		$user_email 	= $_POST['user_email'];
+		$user_password 	= $_POST['user_password'];
+		$user_date 		= date('d-m-y');
 
 		if (!empty($user_password)) {
 
-			$query_password = "SELECT user_password WHERE user_id = $the_user_id";
+			$query_password = "SELECT user_password FROM users WHERE user_id = $the_user_id";
 			$get_user_query = mysqli_query($connection, $query_password);
 			confirmQuery($get_user_query);
 
 			$row = mysqli_fetch_array($get_user_query);
 			$db_user_password = $row['user_password'];
 
-			if ($db_user_password != $user_password) {
-				$hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12) );
-			}	
+			//if ($db_user_password != $user_password) {
+			$hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12) );
+			//}	
 
 			// Update DB
 			$query = "UPDATE users SET ";
@@ -51,7 +54,7 @@ if (isset($_GET['edit_user'])) {
 			$query .= "username = '{$username}', ";
 			$query .= "user_email = '{$user_email}', ";
 			$query .= "user_password = '{$hashed_password}' ";
-			$query .= "WHERE user_id = {$the_user_id} ";
+			$query .= "WHERE user_id = {$the_user_id}";
 
 			$edit_user_query = mysqli_query($connection, $query);
 
