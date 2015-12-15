@@ -1,7 +1,7 @@
 <?php 
 
 if (isset($_GET['p_id'])) {
-	$the_post_id = $_GET['p_id'];
+	$the_post_id = escape($_GET['p_id']);
 } else {
 	die("GET p_id FAILED" . mysqli_error($connection));
 }
