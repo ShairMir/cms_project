@@ -1,6 +1,7 @@
 <?php include "includes/admin_header.php"; ?>
 
 <div id="wrapper">
+
     <!-- Navigation -->
     <?php include "includes/admin_navigation.php"; ?>
 
@@ -12,12 +13,10 @@
             <div class="row">
                 <div class="col-lg-12">
 
-
                     <h1 class="page-header">
                         Welcome to the Dashboard
                         <small><?php echo $_SESSION['username']; ?></small>
                     </h1>
-
 
                 </div>
             </div>
@@ -94,7 +93,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-user fa-5x"></i>
+                                    <i class="fa fa-users fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
 

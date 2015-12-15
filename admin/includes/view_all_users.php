@@ -7,6 +7,10 @@
             <th>Lastname</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Admin</th>
+            <th>Subscriber</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -48,8 +52,8 @@
 
                 echo "<td><a href='users.php?change_to_admin=$user_id''>Admin</a></td>";
                 echo "<td><a href='users.php?change_to_subscriber=$user_id''>Subscriber</a></td>";
-                echo "<td><a href='users.php?source=edit_user&edit_user=$user_id''>Edit</a></td>";
-                echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this user?')\" href='users.php?delete=$user_id'>Delete</a></td>";
+                echo "<td><a href='users.php?source=edit_user&edit_user=$user_id''><i class='fa fa-pencil-square-o fa-lg'></i></a></td>";
+                echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this user?')\" href='users.php?delete=$user_id'><i class='fa fa-times fa-lg'></i></a></td>";
                 echo "</tr>";
             }        
         } 
@@ -60,36 +64,39 @@
  </table>
 
 
-<?php // DELETING COMMENTS
+<?php 
 
-if (isset($_GET['delete'])) {
-    $the_user_id = $_GET['delete'];
+if ($_SESSION['user_role'] == 'admin') {
 
-    $query = "DELETE FROM users WHERE user_id = {$the_user_id}";
+    // DELETING COMMENTS
+    if (isset($_GET['delete'])) {
+        $the_user_id = escape($_GET['delete']);
 
-    $delete_query = mysqli_query($connection, $query);
-    header("Location: users.php");
+        $query = "DELETE FROM users WHERE user_id = {$the_user_id}";
+
+        $delete_query = mysqli_query($connection, $query);
+        header("Location: users.php");
+    }
+
+    // USER_ROLE changed to ADMIN
+    if (isset($_GET['change_to_admin'])) {
+        $the_user_id = escape($_GET['change_to_admin']);
+
+        $query = "UPDATE users SET user_role = 'admin' WHERE user_id = {$the_user_id} ";
+
+        $change_to_admin_query = mysqli_query($connection, $query);
+        header("Location: users.php");
+    }
+
+    // USER_ROLE changed to SUBSCRIBER
+    if (isset($_GET['change_to_subscriber'])) {
+        $the_user_id = escape($_GET['change_to_subscriber']);
+
+        $query = "UPDATE users SET user_role = 'subscriber' WHERE user_id = {$the_user_id} ";
+
+        $change_to_subscriber_query = mysqli_query($connection, $query);
+        header("Location: users.php");
+    }
 }
-
-// USER_ROLE changed to ADMIN
-if (isset($_GET['change_to_admin'])) {
-    $the_user_id = $_GET['change_to_admin'];
-
-    $query = "UPDATE users SET user_role = 'admin' WHERE user_id = {$the_user_id} ";
-
-    $change_to_admin_query = mysqli_query($connection, $query);
-    header("Location: users.php");
-}
-
-// USER_ROLE changed to SUBSCRIBER
-if (isset($_GET['change_to_subscriber'])) {
-    $the_user_id = $_GET['change_to_subscriber'];
-
-    $query = "UPDATE users SET user_role = 'subscriber' WHERE user_id = {$the_user_id} ";
-
-    $change_to_subscriber_query = mysqli_query($connection, $query);
-    header("Location: users.php");
-}
-
 ?>
 

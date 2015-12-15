@@ -11,35 +11,35 @@ if (isset($_SESSION['username'])) {
 
     while ($row = mysqli_fetch_assoc($select_user_profile_query)) {
 
-        $user_id = $row['user_id'];
-        $username = $row['username'];
-        $user_password = $row['user_password'];
+        $user_id        = $row['user_id'];
+        $username       = $row['username'];
+        $user_password  = $row['user_password'];
         $user_firstname = $row['user_firstname'];
-        $user_lastname = $row['user_lastname'];
-        $user_email = $row['user_email'];
-        $user_image = $row['user_image'];
-        $user_role = $row['user_role'];
+        $user_lastname  = $row['user_lastname'];
+        $user_email     = $row['user_email'];
+        $user_image     = $row['user_image'];
+        $user_role      = $row['user_role'];
     }
 }    
 ?>
 
 <?php // UPDATING USER PROFILE
 
-if (isset($_POST['edit_user'])) {
-    $user_firstname = $_POST['user_firstname'];
-    $user_lastname = $_POST['user_lastname'];
-    $user_role = $_POST['user_role'];
-
+if (isset($_POST['edit_user']) && ($_SESSION['user_role'] == 'admin')) {
+    $user_firstname = escape($_POST['user_firstname']);
+    $user_lastname  = escape($_POST['user_lastname']);
+    $user_role      = escape($_POST['user_role']);
     // $user_image = $_FILES['image']['name'];
     // $user_image_temp = $_FILES['image']['tmp_name'];
-
-    $username = $_POST['username'];
-    $user_email = $_POST['user_email'];
-    $user_password = $_POST['user_password'];
+    $username       = escape($_POST['username']);
+    $user_email     = escape($_POST['user_email']);
+    $user_password  = escape($_POST['user_password']);
+    $user_password  = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12) );
     // $user_date = date('d-m-y');
 
     // move_uploaded_file($post_image_temp, "./images/$post_image");
 
+    // update DB table
     $query = "UPDATE users SET ";
     $query .= "user_firstname = '{$user_firstname}', ";
     $query .= "user_lastname = '{$user_lastname}', ";
@@ -71,10 +71,18 @@ if (isset($_POST['edit_user'])) {
 
 
                         <h1 class="page-header">
-                            Welcome to Admin
+                            Profile
                             <small>Author</small>
                         </h1>
-                        
+                                
+                        <?php 
+
+                        if (isset($_POST['edit_user'])) {
+                            echo "<p class='bg-success'>Your profile has been updated.</p>";
+                        }
+
+                        ?>
+
                         <form action="" method="post" enctype="multipart/form-data">
                             
                             <div class="form-group">
@@ -90,7 +98,7 @@ if (isset($_POST['edit_user'])) {
                             <div class="form-group">
                                 <select name="user_role" id="">
                                     
-                                    <option value="subscriber"><?php echo $user_role; ?></option>
+                                    <option value="<?php echo $user_role; ?>"><?php echo $user_role; ?></option>
                                     <?php 
 
                                     if ($user_role == 'admin') {

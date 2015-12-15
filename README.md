@@ -1,6 +1,6 @@
 # cms_project
 
-Creating a CMS using Procedural PHP, MySQL and Bootstrap template.
+Creating a Blog CMS using Procedural PHP, MySQL and Bootstrap template.
 
 Udemy Course Used:
 

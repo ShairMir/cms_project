@@ -2,5 +2,6 @@
 *.txt
 
 *.jpg
+includes/db.php
 
-images/1923.jpg
+test.php

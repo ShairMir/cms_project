@@ -4,26 +4,13 @@
 
 if(isset($_POST['submit'])) {
 
-    $username = $_POST['username'];
-    $email    = $_POST['email'];
-    $password = $_POST['password'];
+    $username = escape($_POST['username']);
+    $email    = escape($_POST['email']);
+    $password = escape($_POST['password']);
 
     if(!empty($username) && !empty($email) && !empty($password)) {
 
-        $username = mysqli_real_escape_string($connection, $username);
-        $email    = mysqli_real_escape_string($connection, $email);
-        $password = mysqli_real_escape_string($connection, $password);
-
-        $query = "SELECT randSalt FROM users";
-        $select_randsalt_query = mysqli_query($connection, $query);
-
-        if(!$select_randsalt_query) {
-            die("Query Failed" . mysqli_error($connection));
-        }
-
-        $row = mysqli_fetch_array($select_randsalt_query);
-        $salt = $row['randSalt'];
-        $password = crypt($password, $salt);
+        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12) );
 
         $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
         $query .= "VALUES('{$username}', '{$email}', '{$password}', 'subscriber' ) ";
@@ -86,8 +73,6 @@ if(isset($_POST['submit'])) {
     </section>
 
 
-        <hr>
-
-
+    <hr>
 
 <?php include "includes/footer.php";?>

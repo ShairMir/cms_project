@@ -5,15 +5,18 @@
 
         <?php 
 
-        if(isset($_GET['edit'])) {
-            $cat_id = $_GET['edit'];
+        // ON THE CONDITION THAT THE USER ROLE IS ADMIN
+        if ($_SESSION['user_role'] == 'admin') {
 
-            $query = "SELECT * FROM categories WHERE cat_id = {$cat_id} ";
-            $select_categories_id = mysqli_query($connection, $query);
+            if(isset($_GET['edit'])) {
+                $cat_id = escape($_GET['edit']);
 
-            while ($row = mysqli_fetch_assoc($select_categories_id)) {
-                $cat_id = $row['cat_id'];
-                $cat_title = $row['cat_title'];
+                $query = "SELECT * FROM categories WHERE cat_id = {$cat_id} ";
+                $select_categories_id = mysqli_query($connection, $query);
+
+                while ($row = mysqli_fetch_assoc($select_categories_id)) {
+                    $cat_id = $row['cat_id'];
+                    $cat_title = $row['cat_title'];
 
         ?>
             
@@ -21,27 +24,26 @@
 
         <?php 
 
-            }
-        }
+                } // end while loop
+            } // end $_GET['edit'])
         
         ?>
 
          <?php 
 
-        // UPDATE QUERY
-        if (isset($_POST['update_category'])) {
-        $the_cat_title = trim($_POST['cat_title']); // removing spaces while editing
-        $the_cat_title = mysqli_real_escape_string($connection, $the_cat_title); // sanitizing
+            // UPDATE QUERY 
+            if (isset($_POST['update_category'])) {
+            $the_cat_title = escape($_POST['cat_title']);
 
+            $query = "UPDATE categories SET cat_title = '{$the_cat_title}' WHERE cat_id = {$cat_id} ";
+            $update_query = mysqli_query($connection, $query);
 
-        $query = "UPDATE categories SET cat_title = '{$the_cat_title}' WHERE cat_id = {$cat_id} ";
-        $update_query = mysqli_query($connection, $query);
-
-            if(!$update_query) {
-                die("QUERY FAILED" . mysqli_error($connection));
+                if(!$update_query) {
+                    die("QUERY FAILED" . mysqli_error($connection));
+                }
+                header('Location: ' . $_SERVER['PHP_SELF']);
             }
-            header('Location: ' . $_SERVER['PHP_SELF']);
-        }
+        } // end if $_SESSION
 
         ?>
 

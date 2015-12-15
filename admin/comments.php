@@ -22,7 +22,7 @@
                         <?php 
 
                         if(isset($_GET['source'])) {
-                            $source = $_GET['source'];
+                            $source = escape($_GET['source']);
                         } else {
                             $source = '';
                         }
@@ -35,10 +35,6 @@
 
                             case 'edit_post';
                                 include "includes/edit_post.php";
-                                break;
-
-                            case '34';
-                                echo "Nice 100";
                                 break;
 
                             default;

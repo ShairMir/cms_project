@@ -1,66 +1,70 @@
 <?php 
 
-if (isset($_GET['edit_user'])) {
-	$the_user_id = $_GET['edit_user'];
+// Get request user id and database data extraction
+if (isset($_GET['edit_user']) && ($_SESSION['user_role'] == 'admin')) {
+
+	$the_user_id = escape($_GET['edit_user']);
 
 	$query = "SELECT * FROM users WHERE user_id = $the_user_id";
-
 	$select_users_query = mysqli_query($connection, $query);
+
 	while ($row = mysqli_fetch_assoc($select_users_query)) {
-		$user_id = $row['user_id'];
-	    $username = $row['username'];
-	    $user_password = $row['user_password'];
+
+		$user_id 		= $row['user_id'];
+	    $username 		= $row['username'];
+	    $user_password 	= $row['user_password'];
 	    $user_firstname = $row['user_firstname'];
-	    $user_lastname = $row['user_lastname'];
-	    $user_email = $row['user_email'];
-	    $user_image = $row['user_image'];
-	    $user_role = $row['user_role'];
+	    $user_lastname 	= $row['user_lastname'];
+	    $user_email 	= $row['user_email'];
+	    $user_image 	= $row['user_image'];
+	    $user_role 		= $row['user_role'];
 	}
-}
+?>
 
-if (isset($_POST['edit_user'])) {
-	
-	$user_firstname = $_POST['user_firstname'];
-	$user_lastname = $_POST['user_lastname'];
-	$user_role = $_POST['user_role'];
+<?php 
+	// Post request to update user
+	if (isset($_POST['edit_user'])) { 
+		
+		$user_firstname = escape($_POST['user_firstname']);
+		$user_lastname 	= escape($_POST['user_lastname']);
+		$user_role 		= escape($_POST['user_role']);
+		$username 		= escape($_POST['username']);
+		$user_email 	= escape($_POST['user_email']);
+		$user_password 	= escape($_POST['user_password']);
+		$user_date 		= escape(date('d-m-y'));
 
-	// $user_image = $_FILES['image']['name'];
-	// $user_image_temp = $_FILES['image']['tmp_name'];
+		if (!empty($user_password)) {
 
-	$username = $_POST['username'];
-	$user_email = $_POST['user_email'];
-	$user_password = $_POST['user_password'];
-	// $user_date = date('d-m-y');
+			$query_password = "SELECT user_password FROM users WHERE user_id = $the_user_id";
+			$get_user_query = mysqli_query($connection, $query_password);
+			confirmQuery($get_user_query);
 
-	// move_uploaded_file($post_image_temp, "./images/$post_image");
+			$row = mysqli_fetch_array($get_user_query);
+			$db_user_password = $row['user_password'];
 
-	// Select the default Salt value from the database, used for password encryption
-	$query = "SELECT randSalt FROM users";
-	$select_randsalt_query = mysqli_query($connection, $query);
-	if (!$select_randsalt_query) {
-		die("Query Failed" . mysqli_error($connection));
-	}
+			//if ($db_user_password != $user_password) {
+			$hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12) );
+			//}	
 
-	$row = mysqli_fetch_array($select_randsalt_query);
-	$salt = $row['randSalt'];
-	$hashed_password = crypt($user_password, $salt);
+			// Update DB
+			$query = "UPDATE users SET ";
+			$query .= "user_firstname = '{$user_firstname}', ";
+			$query .= "user_lastname = '{$user_lastname}', ";
+			$query .= "user_role = '{$user_role}', ";
+			$query .= "username = '{$username}', ";
+			$query .= "user_email = '{$user_email}', ";
+			$query .= "user_password = '{$hashed_password}' ";
+			$query .= "WHERE user_id = {$the_user_id}";
 
-	// Update DB
-	$query = "UPDATE users SET ";
-	$query .= "user_firstname = '{$user_firstname}', ";
-	$query .= "user_lastname = '{$user_lastname}', ";
-	$query .= "user_role = '{$user_role}', ";
-	$query .= "username = '{$username}', ";
-	$query .= "user_email = '{$user_email}', ";
-	$query .= "user_password = '{$hashed_password}' ";
-	$query .= "WHERE user_id = {$the_user_id} ";
+			$edit_user_query = mysqli_query($connection, $query);
 
-	$edit_user_query = mysqli_query($connection, $query);
+			confirmQuery($edit_user_query);
 
-	confirmQuery($edit_user_query);
-
-	echo "<p class='bg-success'>User Updated. <a class='text-danger' href='../admin/users.php'>View All Users?</a></p>";
-
+			echo "<p class='bg-success'>User Updated. <a class='text-danger' href='../admin/users.php'>View All Users?</a></p>";
+		} 
+	} 
+} else { // If the user id is not present in the URL, redirect to the home page
+	header("Location: index.php");
 }
 
 ?>

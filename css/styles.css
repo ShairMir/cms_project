@@ -1,0 +1,27 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+/* ******** PAGINATION STYLES ******** */
+	
+	/* Default style for pagination */
+	.pager li a {
+		background: #94438C !important;
+		color: white;
+		border: solid 4px;
+	}
+
+	/* highlights the first page anchor with first_link class */
+	.pager li:first-child a.first_link {
+		background: #69A7B3 !important;
+		color: white;
+		border: solid 4px;
+	}
+
+	/* highlights the pages with the active_link class */
+	.pager li a.active_link {
+		background: #69A7B3 !important;
+		color: white;
+		border: solid 4px;
+	}
+	

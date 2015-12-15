@@ -8,7 +8,6 @@ height: 1600px;
 
 }
 
-
 #loading {
 
 width: 500px;
@@ -20,3 +19,54 @@ background-repeat: no-repeat;
 background-position: center;
 
 }
+
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+a i.fa-fw {
+	color: #2290F2;
+}
+
+a i.fa-times {
+	color: red;
+}
+
+a i.fa-pencil-square-o {
+	color: #0E7748;
+}
+
+.fa-user {
+	color: #2290F2;
+}
+
+.table thead:first-child>tr:first-child>th {
+	text-align: center;
+	background-color: black;
+	color: white;
+}
+
+td {
+	text-align: center;
+}
+/*
+.navbar-inverse,
+.side-nav {
+    background-color: #D40037;
+    border-color: #D40037;
+}
+
+div#wrapper {
+	background-color: #D40037;
+}
+*/
+/*div#wrapper a {
+	color: white;
+}
+*/
+
+
+
+
+
+

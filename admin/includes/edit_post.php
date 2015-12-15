@@ -1,77 +1,69 @@
 <?php 
 
-if (isset($_GET['p_id'])) {
-	$the_post_id = $_GET['p_id'];
-} else {
-	die("GET p_id FAILED" . mysqli_error($connection));
-}
+if ($_SESSION['user_role'] == 'admin') {
 
-$query = "SELECT * FROM posts WHERE post_id = $the_post_id";
-$select_posts_by_id = mysqli_query($connection, $query);
+	if (isset($_GET['p_id'])) {
+		$the_post_id = escape($_GET['p_id']);
+	} else {
+		die("GET p_id FAILED" . mysqli_error($connection));
+	}
 
-while ($row = mysqli_fetch_assoc($select_posts_by_id)) {
-    $post_id = $row['post_id'];
-    $post_author = $row['post_author'];
-    $post_title = $row['post_title'];
-    $post_category_id = $row['post_category_id'];
-    $post_status = $row['post_status'];
-    $post_image = $row['post_image'];
-    $post_content = $row['post_content'];
-    $post_tags = $row['post_tags'];
-    $post_comment_count = $row['post_comment_count'];
-    $post_date = $row['post_date'];
+	$query = "SELECT * FROM posts WHERE post_id = $the_post_id";
+	$select_posts_by_id = mysqli_query($connection, $query);
 
-    $post_id = mysqli_real_escape_string($connection, $post_id);
-    $post_author = mysqli_real_escape_string($connection, $post_author);
-    $post_title = mysqli_real_escape_string($connection, $post_title);
-    $post_category_id = mysqli_real_escape_string($connection, $post_category_id);
-    $post_status = mysqli_real_escape_string($connection, $post_status);
-    $post_image = mysqli_real_escape_string($connection, $post_image);
-    $post_content = mysqli_real_escape_string($connection, $post_content);
-    $post_tags = mysqli_real_escape_string($connection, $post_tags);
-    $post_comment_count = mysqli_real_escape_string($connection, $post_comment_count);
-    $post_date = mysqli_real_escape_string($connection, $post_date);
+	while ($row = mysqli_fetch_assoc($select_posts_by_id)) {
+	    $post_id 			= $row['post_id'];
+	    $post_user 			= $row['post_user'];
+	    $post_title 		= $row['post_title'];
+	    $post_category_id 	= $row['post_category_id'];
+	    $post_status 		= $row['post_status'];
+	    $post_image 		= $row['post_image'];
+	    $post_content 		= $row['post_content'];
+	    $post_tags 			= $row['post_tags'];
+	    $post_comment_count = $row['post_comment_count'];
+	    $post_date 			= $row['post_date'];
 
-}
+	}
 
-if (isset($_POST['update_post'])) {
+	if (isset($_POST['update_post'])) {
 
-    $post_author = $_POST['post_author'];
-    $post_title = $_POST['post_title'];
-    $post_category_id = $_POST['post_category'];
-    $post_status = $_POST['post_status'];
-    $post_image = $_FILES['image']['name'];
-    $post_image_temp = $_FILES['image']['tmp_name'];
-    $post_content = $_POST['post_content'];
-    $post_tags = $_POST['post_tags'];
+	    $post_user 			= escape($_POST['post_user']);
+	    $post_title 		= escape($_POST['post_title']);
+	    $post_category_id 	= escape($_POST['post_category']);
+	    $post_status 		= escape($_POST['post_status']);
+	    $post_image 		= escape($_FILES['image']['name']);
+	    $post_image_temp 	= escape($_FILES['image']['tmp_name']);
+	    $post_content 		= escape($_POST['post_content']);
+	    $post_tags 			= escape($_POST['post_tags']);
 
-    move_uploaded_file($post_image_temp, "../images/$post_image");
+	    move_uploaded_file($post_image_temp, "../images/$post_image");
 
-    if(empty($post_image)) {
-    	$query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
-    	$select_image = mysqli_query($connection, $query);
+	    if(empty($post_image)) {
+	    	$query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
+	    	$select_image = mysqli_query($connection, $query);
 
-    	while ($row = mysqli_fetch_assoc($select_image)) {
-    		$post_image = $row['post_image'];
-    	}
-    }
+	    	while ($row = mysqli_fetch_assoc($select_image)) {
+	    		$post_image = $row['post_image'];
+	    	}
+	    }
 
-    $query = "UPDATE posts SET ";
-    $query .= "post_title = '{$post_title}', ";
-    $query .= "post_category_id = '{$post_category_id}', ";
-    $query .= "post_date = now(), ";
-    $query .= "post_author = '{$post_author}', ";
-    $query .= "post_status = '{$post_status}', ";
-    $query .= "post_tags = '{$post_tags}', ";
-    $query .= "post_content = '{$post_content}', ";
-    $query .= "post_image = '{$post_image}' ";
-    $query .= "WHERE post_id = {$the_post_id}";
-	
-	$update_post = mysqli_query($connection, $query);
+	    $query = "UPDATE posts SET ";
+	    $query .= "post_title = '{$post_title}', ";
+	    $query .= "post_category_id = '{$post_category_id}', ";
+	    $query .= "post_date = now(), ";
+	    $query .= "post_user = '{$post_user}', ";
+	    $query .= "post_status = '{$post_status}', ";
+	    $query .= "post_tags = '{$post_tags}', ";
+	    $query .= "post_content = '{$post_content}', ";
+	    $query .= "post_image = '{$post_image}' ";
+	    $query .= "WHERE post_id = {$the_post_id}";
+		
+		$update_post = mysqli_query($connection, $query);
 
-	confirmQuery($update_post);
+		confirmQuery($update_post);
 
-	echo "<p class='bg-success'>Post Updated. <a class='text-danger' href='../post.php?p_id=$post_id'>View Post</a> or <a class='text-danger' href='posts.php'>Edit More Posts</a> </p>";
+		echo "<p class='bg-success'>Post Updated. <a class='text-danger' href='../post.php?p_id=$post_id'>View Post</a> or <a class='text-danger' href='posts.php'>Edit More Posts</a> </p>";
+	}
 }
 
 ?>
@@ -108,11 +100,33 @@ if (isset($_POST['update_post'])) {
 		</select>
 	</div>
 
-	
 	<div class="form-group">
-		<label for="title">Post Author</label>
-		<input value="<?php echo $post_author;?>" type="text" class="form-control" name="post_author">
+		<label for="title">Users</label>
+		<select name="post_user" id="">
+			<?php echo "<option value='$post_user'>{$post_user}</option>"; ?>
+			<?php 
+
+			$user_query = "SELECT * FROM users";
+			$select_users = mysqli_query($connection, $user_query);
+
+			confirmQuery($select_users);
+
+			while ($row = mysqli_fetch_assoc($select_users)) {
+				$user_id = $row['user_id'];
+				$username = $row['username'];
+
+				echo "<option value='$username'>{$username}</option>";
+			}
+
+			?>
+
+		</select>
 	</div>
+	
+	<!-- <div class="form-group">
+		<label for="title">Post Author</label>
+		<input value="<?php //echo $post_user;?>" type="text" class="form-control" name="post_user">
+	</div> -->
 
 	<div class="form-group">
 		<label for="title">Post Status</label><br>
