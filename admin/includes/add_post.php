@@ -2,17 +2,15 @@
 
 if (isset($_POST['create_post'])) {
 	
-	$post_title = $_POST['title'];
-	$post_user = $_POST['post_user'];
-	$post_category_id = $_POST['post_category'];
-	$post_status = $_POST['post_status'];
-
-	$post_image = $_FILES['image']['name'];
-	$post_image_temp = $_FILES['image']['tmp_name'];
-
-	$post_tags = $_POST['post_tags'];
-	$post_content = $_POST['post_content'];
-	$post_date = date('d-m-y');
+	$post_title 		= escape($_POST['title']);
+	$post_user 			= escape($_POST['post_user']);
+	$post_category_id 	= escape($_POST['post_category']);
+	$post_status 		= escape($_POST['post_status']);
+	$post_image 		= escape($_FILES['image']['name']);
+	$post_image_temp 	= escape($_FILES['image']['tmp_name']);
+	$post_tags 			= escape($_POST['post_tags']);
+	$post_content 		= escape($_POST['post_content']);
+	$post_date 			= escape(date('d-m-y'));
 
 	move_uploaded_file($post_image_temp, "../images/$post_image");
 
