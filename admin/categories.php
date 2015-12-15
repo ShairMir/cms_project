@@ -36,8 +36,8 @@
                             
                             <?php // UPDATE AND INCLUDE QUERY
 
-                                if(isset($_GET['edit'])) { // if the 'edit' from line 75 is set
-                                    $cat_id = $_GET['edit'];
+                                if(isset($_GET['edit'])) { // if the 'edit' from findAllCategories();
+                                    $cat_id = escape($_GET['edit']);
 
                                     include "includes/update_categories.php";
 

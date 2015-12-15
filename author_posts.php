@@ -15,8 +15,8 @@
                 <?php 
 
                 if (isset($_GET['p_id'])) {
-                    $the_post_id = $_GET['p_id'];
-                    $the_post_user = $_GET['user'];
+                    $the_post_id    = escape($_GET['p_id']);
+                    $the_post_user  = escape($_GET['user']);
 
                     echo "<h1 class='page-header'>All posts by $the_post_user</h1>";      
                 }
@@ -25,12 +25,12 @@
                 $select_all_posts_query = mysqli_query($connection, $query);
 
                 while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
-                    $post_title = $row['post_title'];
-                    $post_user = $row['post_user'];
-                    $post_date = $row['post_date'];
-                    $post_image = $row['post_image'];
-                    $post_content = $row['post_content'];
-                    $post_tags = $row['post_tags'];
+                    $post_title     = $row['post_title'];
+                    $post_user      = $row['post_user'];
+                    $post_date      = $row['post_date'];
+                    $post_image     = $row['post_image'];
+                    $post_content   = $row['post_content'];
+                    $post_tags      = $row['post_tags'];
                 
                 ?>
 

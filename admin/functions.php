@@ -54,10 +54,9 @@ function insert_categories() {
     global $connection;
 
     if (isset($_POST['submit'])) { // input name='submit' from the form with post method
-        $cat_title = trim($_POST['cat_title']); // removing spaces + refering to form with name = "cat_title"
-        $cat_title = mysqli_real_escape_string($connection, $cat_title); // sanitizing
+        $cat_title = escape($_POST['cat_title']);
 
-        if (empty(trim($cat_title))) { // dont allow spaces as entry
+        if (empty($cat_title)) { 
             echo "<h1>This field should not be empty</h1>";
         } else {
             $query = "INSERT INTO categories(cat_title) "; // insert into categories/cat_title db ..
@@ -95,8 +94,8 @@ function findAllCategories() {
 function deleteCategories() {
 	global $connection;
 	// DELETE QUERY
-    if (isset($_GET['delete'])) { // if the 'delete from line 74 is set'
-        $the_cat_id = $_GET['delete'];
+    if (isset($_GET['delete'])) { // if the 'delete from function FindAllCategories(); is set
+        $the_cat_id = escape($_GET['delete']);
 
         $query = "DELETE FROM categories WHERE cat_id = {$the_cat_id} ";
         $delete_query = mysqli_query($connection, $query);

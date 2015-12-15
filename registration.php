@@ -4,15 +4,11 @@
 
 if(isset($_POST['submit'])) {
 
-    $username = $_POST['username'];
-    $email    = $_POST['email'];
-    $password = $_POST['password'];
+    $username = escape($_POST['username']);
+    $email    = escape($_POST['email']);
+    $password = escape($_POST['password']);
 
     if(!empty($username) && !empty($email) && !empty($password)) {
-
-        $username = mysqli_real_escape_string($connection, $username);
-        $email    = mysqli_real_escape_string($connection, $email);
-        $password = mysqli_real_escape_string($connection, $password);
 
         $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12) );
 
@@ -77,7 +73,7 @@ if(isset($_POST['submit'])) {
     </section>
 
 
-        <hr>
+    <hr>
 
 
 
