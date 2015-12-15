@@ -1,7 +1,7 @@
 <?php 
 
 // Get request user id and database data extraction
-if (isset($_GET['edit_user'])) {
+if (isset($_GET['edit_user']) && ($_SESSION['user_role'] == 'admin')) {
 
 	$the_user_id = escape($_GET['edit_user']);
 

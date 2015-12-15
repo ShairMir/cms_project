@@ -1,6 +1,6 @@
 <?php 
 // Looping through the checBoxArray and executing code based on the value chosen in bulk_options form
-if (isset($_POST['checkBoxArray'])) {
+if (isset($_POST['checkBoxArray']) && ($_SESSION['user_role'] == 'admin')) {
     foreach($_POST['checkBoxArray'] as $postValueId) {
         $bulk_options = $_POST['bulk_options'];
 
@@ -143,11 +143,6 @@ if (isset($_POST['checkBoxArray'])) {
                         echo "<td>{$post_author}</td>";
                     }
 
-
-                    
-                    
-
-
                     echo "<td><a href='../post.php?p_id={$post_id}'>{$post_title}</a></td>";
 
                     // Query for showing the post categories dynamically
@@ -189,26 +184,29 @@ if (isset($_POST['checkBoxArray'])) {
  </form>
 
 
- <?php // DELETING POSTS BASED ON THE POST_ID RECEIVED FROM GET REQUEST
+ <?php 
 
-if(isset($_GET['delete'])) {
-    $the_post_id = escape($_GET['delete']);
+if ($_SESSION['user_role'] == 'admin') {
+   
+    // DELETING POSTS BASED ON THE POST_ID RECEIVED FROM GET REQUEST
+    if(isset($_GET['delete'])) {
+        $the_post_id = escape($_GET['delete']);
 
-    $query = "DELETE FROM posts WHERE post_id = $the_post_id";
-    $delete_query = mysqli_query($connection, $query);
-    
-    header("Location: posts.php");
-}
+        $query = "DELETE FROM posts WHERE post_id = $the_post_id";
+        $delete_query = mysqli_query($connection, $query);
+        
+        header("Location: posts.php");
+    }
 
-// RESETTING POSTS VIEW COUNT BASED ON THE POST_ID RECEIVED FROM GET REQUEST
-if(isset($_GET['reset'])) {
-    $the_post_id = escape($_GET['reset']);
+    // RESETTING POSTS VIEW COUNT BASED ON THE POST_ID RECEIVED FROM GET REQUEST
+    if(isset($_GET['reset'])) {
+        $the_post_id = escape($_GET['reset']);
 
-    $query = "UPDATE posts SET post_views_count = 0 WHERE post_id = {$the_post_id}";
-    $reset_view_count_query = mysqli_query($connection, $query);
-    
-    header("Location: posts.php");
-
+        $query = "UPDATE posts SET post_views_count = 0 WHERE post_id = {$the_post_id}";
+        $reset_view_count_query = mysqli_query($connection, $query);
+        
+        header("Location: posts.php");
+    }
 }
 
 ?>

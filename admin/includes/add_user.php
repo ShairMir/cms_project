@@ -1,6 +1,6 @@
 <?php 
 
-if (isset($_POST['create_user'])) {
+if (isset($_POST['create_user']) && ($_SESSION['user_role'] == 'admin')) {
 	
 	$user_firstname = escape($_POST['user_firstname']);
 	$user_lastname 	= escape($_POST['user_lastname']);

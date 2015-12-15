@@ -25,7 +25,7 @@ if (isset($_SESSION['username'])) {
 
 <?php // UPDATING USER PROFILE
 
-if (isset($_POST['edit_user'])) {
+if (isset($_POST['edit_user']) && ($_SESSION['user_role'] == 'admin')) {
     $user_firstname = escape($_POST['user_firstname']);
     $user_lastname  = escape($_POST['user_lastname']);
     $user_role      = escape($_POST['user_role']);

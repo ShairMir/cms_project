@@ -75,6 +75,4 @@ if(isset($_POST['submit'])) {
 
     <hr>
 
-
-
 <?php include "includes/footer.php";?>

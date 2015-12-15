@@ -38,7 +38,6 @@
                                 break;
 
                             default;
-                                // code here
                                 include "includes/view_all_posts.php";
                         }
 

@@ -94,7 +94,8 @@ function findAllCategories() {
 function deleteCategories() {
 	global $connection;
 	// DELETE QUERY
-    if (isset($_GET['delete'])) { // if the 'delete from function FindAllCategories(); is set
+    
+    if (isset($_GET['delete']) && ($_SESSION['user_role'] == 'admin')) { // if the 'delete from function FindAllCategories(); is set
         $the_cat_id = escape($_GET['delete']);
 
         $query = "DELETE FROM categories WHERE cat_id = {$the_cat_id} ";
@@ -102,20 +103,6 @@ function deleteCategories() {
         header("Location: categories.php");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ?>
