@@ -13,7 +13,7 @@
             <div class="col-md-8">
                 
                 <h1 class="page-header">
-                    Search Results
+                    Search results for: <?php echo $_POST['search'] ?>
                 </h1>
 
                 <?php
