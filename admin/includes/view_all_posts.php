@@ -1,3 +1,4 @@
+<?php include "delete_modal.php" ?>
 <?php 
 // Looping through the checBoxArray and executing code based on the value chosen in bulk_options form
 if (isset($_POST['checkBoxArray']) && ($_SESSION['user_role'] == 'admin')) {
@@ -172,7 +173,8 @@ if (isset($_POST['checkBoxArray']) && ($_SESSION['user_role'] == 'admin')) {
                     echo "<td>{$post_date}</td>";
                     echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to reset the view count?')\" href='posts.php?reset=$post_id' >$post_views_count</a></td>";
                     echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'><i class='fa fa-pencil-square-o fa-lg'></i></a></td>";
-                    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this post?')\" href='posts.php?delete=$post_id'><i class='fa fa-times fa-lg'></i></a></td>";
+                    echo "<td><a rel='$post_id' href='javascript:void(0)' class='delete_link'><i class='fa fa-times fa-lg'></i></a></td>";
+                    // echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this post?')\" href='posts.php?delete=$post_id'><i class='fa fa-times fa-lg'></i></a></td>";
                     echo "</tr>";
                 }        
             } 
@@ -210,4 +212,26 @@ if ($_SESSION['user_role'] == 'admin') {
 }
 
 ?>
+
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+        
+
+        $(".delete_link").on('click', function(){
+            
+            var id = $(this).attr("rel");
+            var delete_url = "posts.php?delete="+ id +" ";
+
+            $(".model_delete_link").attr("href", delete_url);
+
+            $("#myModal").modal('show');
+
+
+        });
+
+
+    });
+
+</script>
 
