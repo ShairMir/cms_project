@@ -223,7 +223,7 @@ if ($_SESSION['user_role'] == 'admin') {
             var id = $(this).attr("rel");
             var delete_url = "posts.php?delete="+ id +" ";
 
-            $(".model_delete_link").attr("href", delete_url);
+            $(".modal_delete_link").attr("href", delete_url);
 
             $("#myModal").modal('show');
 
