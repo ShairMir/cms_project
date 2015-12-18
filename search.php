@@ -12,6 +12,9 @@
 
             <div class="col-md-8">
                 
+                <h1 class="page-header">
+                    Search Results
+                </h1>
 
                 <?php
 
@@ -31,19 +34,14 @@
                         echo "<h1> No Results </h1>";
                     } else {
                         while ($row = mysqli_fetch_assoc($search_query)) {
-                            $post_title = $row['post_title'];
-                            $post_author = $row['post_author'];
-                            $post_date = $row['post_date'];
-                            $post_image = $row['post_image'];
-                            $post_content = $row['post_content'];
-                            $post_tags = $row['post_tags'];
+                            $post_title     = $row['post_title'];
+                            $post_author    = $row['post_author'];
+                            $post_date      = $row['post_date'];
+                            $post_image     = $row['post_image'];
+                            $post_content   = $row['post_content'];
+                            $post_tags      = $row['post_tags'];
                         
                 ?>
-
-                            <h1 class="page-header">
-                                Page Heading
-                                <small>Secondary Text</small>
-                            </h1>
 
                             <!-- First Blog Post -->
                             <h2>
