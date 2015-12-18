@@ -24,6 +24,7 @@
                         $cat_title = $row['cat_title'];
                         $cat_id = $row['cat_id'];
 
+                        // Create the 'active' class for navigation
                         $category_class = '';
                         $registration_class = '';
                         $contact_class= '';
