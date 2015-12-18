@@ -1,8 +1,6 @@
 <?php include "db.php"; ?>
 <?php session_start(); ?>
-
-<?php 
-	
+<?php
 // Getting the data from the login form submit button
 if (isset($_POST['login'])) {
 
