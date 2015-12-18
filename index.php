@@ -12,14 +12,14 @@
 
             <div class="col-md-8">
 
-                <h1 class="page-header">
+                <h1 class="text-center page-header">
                     Blog Posts
                 </h1>
                 
                 <?php 
                 // PAGINATION FUNCTIONALITY
 
-                $per_page = 3; // amount of posts per page
+                $per_page = 5; // amount of posts per page
                 $page = 'default';
 
                 // GET request for page number
@@ -35,33 +35,38 @@
                     $page_1 = ($page * $per_page) - $per_page; // else show posts corresponding to the page number e.g. page 3 = LIMIT 10, 5
                 }
 
-                // Query to count the number of published posts and converting it into an integer
-                $post_query_count = "SELECT * FROM posts WHERE post_status = 'published' ";
-                $find_count = mysqli_query($connection, $post_query_count);
+                if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin' ) {
+                    $post_query_count = "SELECT * FROM posts";
+                } else {
+                    $post_query_count = "SELECT * FROM posts WHERE post_status = 'published'";
+                }
 
+                // Query to count the number of published posts and converting it into an integer
+
+                $find_count = mysqli_query($connection, $post_query_count);
                 $count = mysqli_num_rows($find_count); // count rows in posts table
               
-                $count = ceil($count / $per_page); // convert float into integer for the count
-               
+                if($count < 1) {
+                    echo "<h1 class='text-center'>No posts available</h1>";
+                } else {
 
-                // SHOW ALL POSTS BASED ON:
-                // most recent published post and limited to 5 posts for the pagination
-                $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT $page_1, $per_page  "; // e.g. 10, 5 = show posts 11-15 
-                $select_all_posts_query = mysqli_query($connection, $query);
+                    $count = ceil($count / $per_page); // convert float into integer for the count
+                   
+                    // SHOW ALL POSTS BASED ON:
+                    // most recent post and limited to x posts for the pagination, based on $per_page number
+                    $query = "SELECT * FROM posts ORDER BY post_id DESC LIMIT $page_1, $per_page"; // e.g. 10, 5 = show posts 11-15 
+                    $select_all_posts_query = mysqli_query($connection, $query);
 
-                while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
-                    $post_id        = $row['post_id'];
-                    $post_title     = $row['post_title'];
-                    $post_user      = $row['post_user'];
-                    $post_date      = $row['post_date'];
-                    $post_image     = $row['post_image'];
-                    $post_content   = substr($row['post_content'], 0, 150) . "...";
-                    $post_tags      = $row['post_tags'];
-                    $post_status    = $row['post_status'];
-
-                    // show post if status is published
-                    if ($post_status == 'published') {
-                                  
+                    while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
+                        $post_id        = $row['post_id'];
+                        $post_title     = $row['post_title'];
+                        $post_user      = $row['post_user'];
+                        $post_date      = $row['post_date'];
+                        $post_image     = $row['post_image'];
+                        $post_content   = substr($row['post_content'], 0, 150) . "...";
+                        $post_tags      = $row['post_tags'];
+                        $post_status    = $row['post_status'];
+                                      
                         ?> 
 
                         <!-- All Blog Posts -->
@@ -81,9 +86,12 @@
                         <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                         <hr>
-                <?php
+
+                    <?php
+
                     }
                 }
+
                 ?>
 
             </div>

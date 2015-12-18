@@ -18,27 +18,27 @@
                 if (isset($_GET['p_id'])) {
                     $the_post_id = escape($_GET['p_id']);
 
-                    $query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = $the_post_id ";
-                    $send_query = mysqli_query($connection, $query);
+                    $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = $the_post_id ";
+                    $send_query = mysqli_query($connection, $view_query);
 
                     if(!$send_query) {
                         die("Query Failed");
                     }
 
-                    // SHOW ALL POSTS TO ADMIN AND EXCLUDE DRAFT POSTS IF NOT ADMIN
+                    // SHOW DRAFT POSTS TO ADMIN AND EXCLUDE DRAFT POSTS IF NOT ADMIN
 
                     if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
                         $query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
                     } else {
-                        $query = "SELECT * FROM posts WHERE post_id = $the_post_id AND post_status == 'published' ";
+                        $query = "SELECT * FROM posts WHERE post_id = $the_post_id AND post_status = 'published' ";
                     }
 
                     $select_all_posts_query = mysqli_query($connection,$query);
-                    if(mysqli_num_rows($select_all_posts_query) < 1) {
-                        echo "<h1 class='text-center'>No posts available</h1>";
-                    } else {
 
-                    $select_all_posts_query = mysqli_query($connection, $query);
+                    if(!$select_all_posts_query) {
+                        die('query failed' . mysqli_error($connection));
+                    }
+
                     if(mysqli_num_rows($select_all_posts_query) < 1) {
                         echo "<h1 class='text-center'>No posts available</h1>";
                     } else {
