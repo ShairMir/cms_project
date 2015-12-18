@@ -48,6 +48,9 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <!-- Add Web Editing to Textareas with https://tinymce.com/ -->
     <script src="https://cdn.tinymce.com/4/tinymce.min.js"></script>
+        <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <script src="js/scripts.js"></script>
 
 </head>
 
