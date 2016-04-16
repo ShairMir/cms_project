@@ -7,7 +7,6 @@
     <div class="container">
 
         <div class="row">
-
             <!-- Blog Entries Column -->
 
             <div class="col-md-8">
@@ -124,4 +123,6 @@
         </ul>
 
         <hr>
-        <?php include "includes/footer.php"; ?>
+<?php include "includes/footer.php"; ?>
+
+        
