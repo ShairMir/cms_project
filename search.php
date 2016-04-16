@@ -15,12 +15,12 @@
                 <h1 class="page-header">
                     Search results for: <?php echo $_POST['search'] ?>
                 </h1>
-
+                
                 <?php
 
                 if(isset($_POST['submit'])) {
                     $search = escape($_POST['search']);
-               
+
                     $query = "SELECT * FROM posts WHERE post_tags LIKE '%$search%' ";
                     $search_query = mysqli_query($connection, $query);
 
